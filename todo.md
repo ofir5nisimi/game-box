@@ -58,17 +58,17 @@
 
 ---
 
-## Phase 5 — Animated Background
+## Phase 5 — Animated Background ✅
 
-- [ ] `src/components/ParticleBackground.ts`:
+- [x] `src/components/ParticleBackground.ts`:
   - Full-screen `<canvas>` behind all content
-  - Floating shapes: ⭐ stars, 🔵 circles, 🔺 triangles, 💎 diamonds
+  - Floating shapes: ⭐ stars, � circles, 🔺 triangles, 💎 diamonds
   - Randomized colors from the palette
   - Slow drift + subtle rotation
   - Parallax-like depth (different sizes & speeds)
   - Responsive — resizes with window
   - GPU-accelerated via `requestAnimationFrame`
-- [ ] `src/styles/components.css` — canvas positioning & z-index layers
+- [x] `src/styles/components.css` — canvas positioning & z-index layers
 
 ---
 
