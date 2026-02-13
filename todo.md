@@ -84,9 +84,9 @@
 
 ---
 
-## Phase 7 — Category Filter
+## Phase 7 — Category Filter ✅
 
-- [ ] `src/components/CategoryFilter.ts`:
+- [x] `src/components/CategoryFilter.ts`:
   - Pill-shaped filter buttons in a horizontal scrollable row
   - Categories: הכל 🌟 · חשבון 🔢 · אנגלית 🔤 · כיף 🎉
   - Active state with gradient background + shadow glow

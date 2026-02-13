@@ -18,6 +18,7 @@ import { GameRegistry } from '../models/GameRegistry.ts';
 import { GameInfo } from '../models/GameInfo.ts';
 import { ParticleBackground } from '../components/ParticleBackground.ts';
 import { Header } from '../components/Header.ts';
+import { CategoryFilter as CategoryFilterComponent } from '../components/CategoryFilter.ts';
 import type { AppEvents, CategoryFilter } from '../types/index.ts';
 
 export class App {
@@ -30,6 +31,7 @@ export class App {
     private currentView: Component | null = null;
     private particleBg: ParticleBackground | null = null;
     private header: Header | null = null;
+    private categoryFilter: CategoryFilterComponent | null = null;
     private activeCategory: CategoryFilter = 'all';
 
     private constructor(rootElement: HTMLElement, registry: GameRegistry) {
@@ -107,13 +109,8 @@ export class App {
         <!-- Header (mounted by component) -->
         <div id="header-mount"></div>
 
-        <!-- Category Filter -->
-        <nav class="category-filter">
-          ${this.renderCategoryButton('all', '🌟 הכל')}
-          ${this.renderCategoryButton('math', '🔢 חשבון')}
-          ${this.renderCategoryButton('english', '🔤 אנגלית')}
-          ${this.renderCategoryButton('fun', '🎉 כיף')}
-        </nav>
+        <!-- Category Filter (mounted by component) -->
+        <div id="category-filter-mount"></div>
 
         <!-- Game Cards Grid -->
         <div class="game-grid" id="game-grid">
@@ -128,6 +125,22 @@ export class App {
             if (this.header) this.header.unmount();
             this.header = new Header(headerMount as HTMLElement);
             this.header.mount();
+        }
+
+        // Mount the CategoryFilter component
+        const filterMount = this.rootElement.querySelector('#category-filter-mount');
+        if (filterMount) {
+            if (this.categoryFilter) this.categoryFilter.unmount();
+            this.categoryFilter = new CategoryFilterComponent(
+                filterMount as HTMLElement,
+                this.activeCategory,
+                (category) => {
+                    this.activeCategory = category;
+                    this.eventBus.emit('category:change', { category });
+                    this.showHome();
+                },
+            );
+            this.categoryFilter.mount();
         }
 
         this.attachHomeListeners();
@@ -161,13 +174,7 @@ export class App {
 
     // ─── Rendering Helpers ──────────────────────────────────────
 
-    /**
-     * Render a single category filter button.
-     */
-    private renderCategoryButton(category: CategoryFilter, label: string): string {
-        const isActive = this.activeCategory === category ? 'active' : '';
-        return `<button class="category-btn ${isActive}" data-category="${category}">${label}</button>`;
-    }
+
 
     /**
      * Render a single game card.
@@ -201,18 +208,6 @@ export class App {
      * Attach interactive event listeners to the home screen.
      */
     private attachHomeListeners(): void {
-        // Category filter buttons
-        this.rootElement.querySelectorAll('.category-btn').forEach((btn) => {
-            btn.addEventListener('click', () => {
-                const category = (btn as HTMLElement).dataset['category'] as CategoryFilter;
-                if (category && category !== this.activeCategory) {
-                    this.activeCategory = category;
-                    this.eventBus.emit('category:change', { category });
-                    this.showHome();
-                }
-            });
-        });
-
         // Game card clicks
         this.rootElement.querySelectorAll('.game-card').forEach((card) => {
             card.addEventListener('click', () => {
