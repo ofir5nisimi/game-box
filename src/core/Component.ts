@@ -26,7 +26,7 @@
  * }
  * ```
  */
-export abstract class Component<TState extends Record<string, unknown> = Record<string, unknown>> {
+export abstract class Component<TState extends object = Record<string, unknown>> {
     /** Root DOM element this component renders into */
     protected element: HTMLElement;
 

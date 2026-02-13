@@ -14,6 +14,7 @@
 import { Router } from './Router.ts';
 import { EventBus } from './EventBus.ts';
 import { Component } from './Component.ts';
+import { GameRegistry } from '../models/GameRegistry.ts';
 import type { AppEvents } from '../types/index.ts';
 
 export class App {
@@ -21,11 +22,13 @@ export class App {
 
     private router: Router;
     private eventBus: EventBus<AppEvents>;
+    private registry: GameRegistry;
     private rootElement: HTMLElement;
     private currentView: Component | null = null;
 
-    private constructor(rootElement: HTMLElement) {
+    private constructor(rootElement: HTMLElement, registry: GameRegistry) {
         this.rootElement = rootElement;
+        this.registry = registry;
         this.router = new Router();
         this.eventBus = new EventBus<AppEvents>();
     }
@@ -33,13 +36,14 @@ export class App {
     /**
      * Get or create the singleton App instance.
      * @param rootElement — Required on first call; the #app container element.
+     * @param registry — Required on first call; the populated GameRegistry.
      */
-    static getInstance(rootElement?: HTMLElement): App {
+    static getInstance(rootElement?: HTMLElement, registry?: GameRegistry): App {
         if (!App.instance) {
-            if (!rootElement) {
-                throw new Error('App.getInstance() requires a root element on first call.');
+            if (!rootElement || !registry) {
+                throw new Error('App.getInstance() requires rootElement and registry on first call.');
             }
-            App.instance = new App(rootElement);
+            App.instance = new App(rootElement, registry);
         }
         return App.instance;
     }
@@ -65,6 +69,13 @@ export class App {
      */
     getRouter(): Router {
         return this.router;
+    }
+
+    /**
+     * Get the game registry.
+     */
+    getRegistry(): GameRegistry {
+        return this.registry;
     }
 
     /**

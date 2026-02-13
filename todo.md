@@ -25,12 +25,12 @@
 
 ---
 
-## Phase 3 — Data Models & Game Registry
+## Phase 3 — Data Models & Game Registry ✅
 
-- [ ] `src/models/GameInfo.ts` — immutable `GameInfo` class with `readonly` props
-- [ ] `src/models/GameRegistry.ts` — typed `Map<string, GameInfo>` with category filtering
-- [ ] `src/games/BaseGame.ts` — abstract `BaseGame` extending `Component` (stub, no games yet)
-- [ ] Register all 8 games as "coming soon" entries in `main.ts`
+- [x] `src/models/GameInfo.ts` — immutable `GameInfo` class with `readonly` props
+- [x] `src/models/GameRegistry.ts` — typed `Map<string, GameInfo>` with category filtering
+- [x] `src/games/BaseGame.ts` — abstract `BaseGame` extending `Component` (stub, no games yet)
+- [x] Register all 8 games as "coming soon" entries in `main.ts`
 
 ---
 
