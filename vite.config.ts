@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+    base: '/game-box/',
     root: '.',
     publicDir: 'public',
     build: {
