@@ -1,0 +1,151 @@
+# 🎮 Game Box — Landing Page TODO
+
+> Phase-by-phase implementation plan for the main home screen.
+> Each game will have its own architecture doc + todo file when added.
+
+---
+
+## Phase 1 — Project Scaffold
+
+- [ ] Initialize Vite project with TypeScript template
+- [ ] Configure `tsconfig.json` (strict mode, ES2022, DOM types)
+- [ ] Configure `vite.config.ts`
+- [ ] Create `index.html` with RTL support, Google Fonts, `<div id="app">`
+- [ ] Create `src/main.ts` entry point (empty bootstrap)
+
+---
+
+## Phase 2 — Core Framework
+
+- [ ] `src/types/index.ts` — shared interfaces & types (`GameCategory`, `GameState`, `IGameInfo`, `AppEvents`, `GameResult`)
+- [ ] `src/core/EventBus.ts` — generic typed pub/sub `EventBus<TEvents>`
+- [ ] `src/core/Component.ts` — abstract generic `Component<TState>` with lifecycle (`render`, `mount`, `unmount`, `setState`)
+- [ ] `src/core/Router.ts` — hash-based SPA router
+- [ ] `src/core/App.ts` — singleton app controller (owns Router, EventBus, GameRegistry)
+
+---
+
+## Phase 3 — Data Models & Game Registry
+
+- [ ] `src/models/GameInfo.ts` — immutable `GameInfo` class with `readonly` props
+- [ ] `src/models/GameRegistry.ts` — typed `Map<string, GameInfo>` with category filtering
+- [ ] `src/games/BaseGame.ts` — abstract `BaseGame` extending `Component` (stub, no games yet)
+- [ ] Register all 8 games as "coming soon" entries in `main.ts`
+
+---
+
+## Phase 4 — Design System (CSS)
+
+- [ ] `src/styles/variables.css` — full design token system:
+  - Color palette (navy bg, pink-red primary, category colors)
+  - Spacing scale (4px base)
+  - Border-radius tokens (pill, card, circle)
+  - Box shadows (glow effects, card elevation)
+  - Font families (Rubik, Fredoka One)
+  - Transition/animation duration tokens
+- [ ] `src/styles/reset.css` — modern CSS reset
+- [ ] `src/styles/typography.css` — Google Fonts imports, heading hierarchy, RTL
+- [ ] `src/styles/animations.css` — keyframes library:
+  - `float` — slow vertical drift for background shapes
+  - `bounce-in` — bouncy entrance for logo
+  - `wobble` — card hover effect
+  - `fade-in` — gentle opacity entrance
+  - `pulse-glow` — pulsing glow on active elements
+  - `spin-slow` — slow rotation for decorative elements
+  - `confetti-fall` — confetti particles dropping
+  - `scale-pop` — satisfying click feedback
+- [ ] `src/styles/index.css` — master file with `@layer` ordering
+
+---
+
+## Phase 5 — Animated Background
+
+- [ ] `src/components/ParticleBackground.ts`:
+  - Full-screen `<canvas>` behind all content
+  - Floating shapes: ⭐ stars, 🔵 circles, 🔺 triangles, 💎 diamonds
+  - Randomized colors from the palette
+  - Slow drift + subtle rotation
+  - Parallax-like depth (different sizes & speeds)
+  - Responsive — resizes with window
+  - GPU-accelerated via `requestAnimationFrame`
+- [ ] `src/styles/components.css` — canvas positioning & z-index layers
+
+---
+
+## Phase 6 — Header & Logo
+
+- [ ] `src/components/Header.ts`:
+  - Large playful "🎮 Game Box" title with Fredoka One font
+  - Bounce-in entrance animation on load
+  - Emoji sparkle effects ✨ around the logo
+  - Subtle hover animation (scale + glow)
+  - Confetti burst on logo click
+  - Hebrew subtitle: "!המשחקים הכי כיפיים" with Rubik font
+
+---
+
+## Phase 7 — Category Filter
+
+- [ ] `src/components/CategoryFilter.ts`:
+  - Pill-shaped filter buttons in a horizontal scrollable row
+  - Categories: הכל 🌟 · חשבון 🔢 · אנגלית 🔤 · כיף 🎉
+  - Active state with gradient background + shadow glow
+  - Smooth color transition on switch
+  - Scale-pop animation on click
+  - Emits `category:change` event via EventBus
+
+---
+
+## Phase 8 — Game Cards Grid
+
+- [ ] `src/components/GameCard.ts`:
+  - Large card with rounded corners + glassmorphism effect
+  - Big emoji icon (animated idle float)
+  - Game title in both Hebrew and English
+  - Category-colored accent strip on the card edge
+  - Hover: wobble + glow + slight scale-up
+  - "...בקרוב" (coming soon) animated badge for unavailable games
+  - Click ripple effect
+  - Micro-animation: icon does a little dance on hover
+- [ ] `src/components/HomeScreen.ts`:
+  - Responsive CSS Grid layout (auto-fit, min 200px cards)
+  - Staggered fade-in entrance for cards
+  - Filters game cards based on selected category
+  - Smooth layout transitions when filtering (cards slide into place)
+- [ ] `src/styles/home.css` — grid layout, card styles, responsive breakpoints
+
+---
+
+## Phase 9 — Game Shell (Placeholder)
+
+- [ ] `src/components/GameShell.ts`:
+  - Wrapper displayed when navigating to a game route
+  - Animated "back to home" button with ← arrow
+  - Score display area (for future use)
+  - "Coming soon!" splash with animation for unavailable games
+  - Smooth page transition (slide-in from right)
+
+---
+
+## Phase 10 — Polish & Integration
+
+- [ ] Wire up `App.ts` — full lifecycle: boot → home → filter → navigate → back
+- [ ] Router integration: `#/` → home, `#/game/:id` → GameShell
+- [ ] Test all category filtering with smooth transitions
+- [ ] Test responsive layout on mobile / tablet / desktop widths
+- [ ] Test RTL layout correctness
+- [ ] Performance check — animation smoothness (60fps target)
+- [ ] Add subtle UI sound effects (optional, if assets available):
+  - Click feedback
+  - Category switch whoosh
+  - Card hover pop
+- [ ] Final visual polish pass — spacing, shadows, consistency
+
+---
+
+## 🚀 After This
+
+Each game will be added as a separate task with its own:
+- `architecture-{game-name}.md` — game-specific design doc
+- `todo-{game-name}.md` — step-by-step implementation checklist
+- New folder under `src/games/{game-name}/`

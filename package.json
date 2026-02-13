@@ -1,0 +1,16 @@
+{
+  "name": "game-box",
+  "private": true,
+  "version": "1.0.0",
+  "description": "🎮 A colorful, interactive game hub for kids — featuring educational math & English games alongside classic fun games.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~5.7.0",
+    "vite": "^6.0.0"
+  }
+}
