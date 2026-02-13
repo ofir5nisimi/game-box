@@ -4,6 +4,8 @@
  * Bootstraps the application, registers all games, and starts the router.
  */
 
+import './styles/index.css';
+
 import { App } from './core/App.ts';
 import { GameInfo } from './models/GameInfo.ts';
 import { GameRegistry } from './models/GameRegistry.ts';

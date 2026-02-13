@@ -1,0 +1,18 @@
+/**
+ * CSS Layer Ordering & Imports
+ *
+ * Using @layer to control specificity:
+ * reset < tokens < typography < animations < components < pages
+ *
+ * Lower layers have lower specificity, so page-level styles
+ * can always override component styles without !important.
+ */
+
+@layer reset, tokens, typography, animations, components, pages;
+
+@import './reset.css' layer(reset);
+@import './variables.css' layer(tokens);
+@import './typography.css' layer(typography);
+@import './animations.css' layer(animations);
+@import './components.css' layer(components);
+@import './home.css' layer(pages);

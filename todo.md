@@ -34,18 +34,18 @@
 
 ---
 
-## Phase 4 — Design System (CSS)
+## Phase 4 — Design System (CSS) ✅
 
-- [ ] `src/styles/variables.css` — full design token system:
+- [x] `src/styles/variables.css` — full design token system:
   - Color palette (navy bg, pink-red primary, category colors)
   - Spacing scale (4px base)
   - Border-radius tokens (pill, card, circle)
   - Box shadows (glow effects, card elevation)
   - Font families (Rubik, Fredoka One)
   - Transition/animation duration tokens
-- [ ] `src/styles/reset.css` — modern CSS reset
-- [ ] `src/styles/typography.css` — Google Fonts imports, heading hierarchy, RTL
-- [ ] `src/styles/animations.css` — keyframes library:
+- [x] `src/styles/reset.css` — modern CSS reset
+- [x] `src/styles/typography.css` — Google Fonts imports, heading hierarchy, RTL
+- [x] `src/styles/animations.css` — keyframes library:
   - `float` — slow vertical drift for background shapes
   - `bounce-in` — bouncy entrance for logo
   - `wobble` — card hover effect
@@ -54,7 +54,7 @@
   - `spin-slow` — slow rotation for decorative elements
   - `confetti-fall` — confetti particles dropping
   - `scale-pop` — satisfying click feedback
-- [ ] `src/styles/index.css` — master file with `@layer` ordering
+- [x] `src/styles/index.css` — master file with `@layer` ordering
 
 ---
 

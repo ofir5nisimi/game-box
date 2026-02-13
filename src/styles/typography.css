@@ -1,0 +1,63 @@
+/**
+ * Typography
+ *
+ * Font families, sizes, and text styles.
+ * Rubik for Hebrew body text, Fredoka One for playful titles.
+ */
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--font-size-md);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+/* ─── Headings ───────────────────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+h1 {
+    font-size: var(--font-size-4xl);
+}
+
+h2 {
+    font-size: var(--font-size-3xl);
+}
+
+h3 {
+    font-size: var(--font-size-2xl);
+}
+
+h4 {
+    font-size: var(--font-size-xl);
+}
+
+/* ─── RTL Text Utilities ─────────────────────────────────── */
+
+/* Force LTR for English content inside RTL layout */
+.text-ltr {
+    direction: ltr;
+    text-align: left;
+    unicode-bidi: isolate;
+}
+
+/* Force RTL for Hebrew content */
+.text-rtl {
+    direction: rtl;
+    text-align: right;
+    unicode-bidi: isolate;
+}
+
+/* Bilingual block — auto direction per line */
+.text-auto {
+    unicode-bidi: plaintext;
+}

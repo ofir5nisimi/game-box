@@ -15,7 +15,8 @@ import { Router } from './Router.ts';
 import { EventBus } from './EventBus.ts';
 import { Component } from './Component.ts';
 import { GameRegistry } from '../models/GameRegistry.ts';
-import type { AppEvents } from '../types/index.ts';
+import { GameInfo } from '../models/GameInfo.ts';
+import type { AppEvents, CategoryFilter } from '../types/index.ts';
 
 export class App {
     private static instance: App | null = null;
@@ -25,6 +26,7 @@ export class App {
     private registry: GameRegistry;
     private rootElement: HTMLElement;
     private currentView: Component | null = null;
+    private activeCategory: CategoryFilter = 'all';
 
     private constructor(rootElement: HTMLElement, registry: GameRegistry) {
         this.rootElement = rootElement;
@@ -86,34 +88,144 @@ export class App {
     }
 
     /**
-     * Show the home screen.
-     * Called by the router when navigating to '/'.
+     * Show the home screen with header, category filter, and game cards.
      */
     showHome(): void {
-        this.setView(null); // Will be replaced with HomeScreen in Phase 8
+        this.setView(null);
+        const games = this.registry.getByCategory(this.activeCategory);
+
         this.rootElement.innerHTML = `
-      <div style="display:flex;align-items:center;justify-content:center;height:100vh;color:white;font-family:'Rubik',sans-serif;">
-        <h1>🎮 Game Box — Loading...</h1>
+      <div class="home-screen">
+        <!-- Header -->
+        <header class="home-header">
+          <div class="sparkle-container">
+            <span class="sparkle">✨</span>
+            <span class="sparkle">⭐</span>
+            <span class="sparkle">✨</span>
+            <span class="sparkle">💫</span>
+            <h1 class="home-logo anim-bounce-in" id="logo">🎮 Game Box</h1>
+          </div>
+          <p class="home-subtitle">!המשחקים הכי כיפיים</p>
+        </header>
+
+        <!-- Category Filter -->
+        <nav class="category-filter">
+          ${this.renderCategoryButton('all', '🌟 הכל')}
+          ${this.renderCategoryButton('math', '🔢 חשבון')}
+          ${this.renderCategoryButton('english', '🔤 אנגלית')}
+          ${this.renderCategoryButton('fun', '🎉 כיף')}
+        </nav>
+
+        <!-- Game Cards Grid -->
+        <div class="game-grid" id="game-grid">
+          ${games.map((game, i) => this.renderGameCard(game, i)).join('')}
+        </div>
       </div>
     `;
+
+        this.attachHomeListeners();
     }
 
     /**
      * Launch a game by its ID.
-     * Called by the router when navigating to '/game/:id'.
      */
     launchGame(gameId: string): void {
+        const game = this.registry.getGame(gameId);
         this.eventBus.emit('game:start', { gameId });
-        // GameShell integration will be added in Phase 9
+
+        const title = game ? game.titleHe : gameId;
+        const icon = game ? game.icon : '🎮';
+
         this.rootElement.innerHTML = `
-      <div style="display:flex;align-items:center;justify-content:center;height:100vh;color:white;font-family:'Rubik',sans-serif;">
-        <div style="text-align:center;">
-          <h1>🎮 ${gameId}</h1>
-          <p>...בקרוב</p>
-          <a href="#/" style="color:#e94560;">חזרה הביתה ←</a>
+      <div class="home-screen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;">
+        <a href="#/" class="btn-back" id="back-btn" style="position:absolute;top:var(--space-5);right:var(--space-5);">
+          → חזרה הביתה
+        </a>
+        <div style="text-align:center;" class="anim-fade-in">
+          <div style="font-size:5rem;margin-bottom:var(--space-4);" class="anim-float">${icon}</div>
+          <h2 style="margin-bottom:var(--space-3);">${title}</h2>
+          <div class="badge badge-coming-soon anim-shimmer" style="font-size:var(--font-size-lg);padding:var(--space-2) var(--space-5);">
+            ✨ ...בקרוב ✨
+          </div>
         </div>
       </div>
     `;
+    }
+
+    // ─── Rendering Helpers ──────────────────────────────────────
+
+    /**
+     * Render a single category filter button.
+     */
+    private renderCategoryButton(category: CategoryFilter, label: string): string {
+        const isActive = this.activeCategory === category ? 'active' : '';
+        return `<button class="category-btn ${isActive}" data-category="${category}">${label}</button>`;
+    }
+
+    /**
+     * Render a single game card.
+     */
+    private renderGameCard(game: GameInfo, index: number): string {
+        const comingSoonClass = game.isAvailable ? '' : 'coming-soon';
+        const badge = game.isAvailable
+            ? ''
+            : '<span class="badge badge-coming-soon game-card__badge">...בקרוב ✨</span>';
+
+        return `
+      <div class="card game-card anim-fade-in-stagger ${comingSoonClass}"
+           data-game-id="${game.id}"
+           data-category="${game.category}"
+           style="animation-delay: ${index * 0.06}s;"
+           role="button"
+           tabindex="0"
+           aria-label="${game.title} — ${game.titleHe}">
+        ${badge}
+        <div class="game-card__icon">${game.icon}</div>
+        <div class="game-card__title-he">${game.titleHe}</div>
+        <div class="game-card__title-en">${game.title}</div>
+        <div class="game-card__description">${game.description}</div>
+      </div>
+    `;
+    }
+
+    // ─── Event Listeners ────────────────────────────────────────
+
+    /**
+     * Attach interactive event listeners to the home screen.
+     */
+    private attachHomeListeners(): void {
+        // Category filter buttons
+        this.rootElement.querySelectorAll('.category-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const category = (btn as HTMLElement).dataset['category'] as CategoryFilter;
+                if (category && category !== this.activeCategory) {
+                    this.activeCategory = category;
+                    this.eventBus.emit('category:change', { category });
+                    this.showHome();
+                }
+            });
+        });
+
+        // Game card clicks
+        this.rootElement.querySelectorAll('.game-card').forEach((card) => {
+            card.addEventListener('click', () => {
+                const gameId = (card as HTMLElement).dataset['gameId'];
+                if (gameId) {
+                    this.router.navigate(`/game/${gameId}`);
+                }
+            });
+
+            // Keyboard accessibility
+            card.addEventListener('keydown', (e) => {
+                if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+                    e.preventDefault();
+                    const gameId = (card as HTMLElement).dataset['gameId'];
+                    if (gameId) {
+                        this.router.navigate(`/game/${gameId}`);
+                    }
+                }
+            });
+        });
     }
 
     // ─── Private ────────────────────────────────────────────────
