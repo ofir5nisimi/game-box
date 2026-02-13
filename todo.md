@@ -72,9 +72,9 @@
 
 ---
 
-## Phase 6 — Header & Logo
+## Phase 6 — Header & Logo ✅
 
-- [ ] `src/components/Header.ts`:
+- [x] `src/components/Header.ts`:
   - Large playful "🎮 Game Box" title with Fredoka One font
   - Bounce-in entrance animation on load
   - Emoji sparkle effects ✨ around the logo
@@ -140,6 +140,21 @@
   - Category switch whoosh
   - Card hover pop
 - [ ] Final visual polish pass — spacing, shadows, consistency
+
+---
+
+## Phase 11 — Mobile & PWA
+
+- [ ] `manifest.json` — PWA manifest for install-to-home-screen
+- [ ] Service worker for offline caching
+- [ ] App icons (192px, 512px) for PWA
+- [ ] `env(safe-area-inset-*)` for notched phones (iPhone X+)
+- [ ] Reduce particle count on mobile (detect `matchMedia` or screen width)
+- [ ] Add `-webkit-backdrop-filter` prefix for older Safari
+- [ ] Touch gesture support for games (swipe, tap feedback)
+- [ ] Orientation handling (lock or adapt for landscape/portrait)
+- [ ] Viewport meta refinement (`user-scalable=no` for game screens)
+- [ ] Test on real devices: iOS Safari, Android Chrome, tablet
 
 ---
 

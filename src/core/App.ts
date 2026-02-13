@@ -17,6 +17,7 @@ import { Component } from './Component.ts';
 import { GameRegistry } from '../models/GameRegistry.ts';
 import { GameInfo } from '../models/GameInfo.ts';
 import { ParticleBackground } from '../components/ParticleBackground.ts';
+import { Header } from '../components/Header.ts';
 import type { AppEvents, CategoryFilter } from '../types/index.ts';
 
 export class App {
@@ -28,6 +29,7 @@ export class App {
     private rootElement: HTMLElement;
     private currentView: Component | null = null;
     private particleBg: ParticleBackground | null = null;
+    private header: Header | null = null;
     private activeCategory: CategoryFilter = 'all';
 
     private constructor(rootElement: HTMLElement, registry: GameRegistry) {
@@ -102,17 +104,8 @@ export class App {
 
         this.rootElement.innerHTML = `
       <div class="home-screen">
-        <!-- Header -->
-        <header class="home-header">
-          <div class="sparkle-container">
-            <span class="sparkle">✨</span>
-            <span class="sparkle">⭐</span>
-            <span class="sparkle">✨</span>
-            <span class="sparkle">💫</span>
-            <h1 class="home-logo anim-bounce-in" id="logo">🎮 Game Box</h1>
-          </div>
-          <p class="home-subtitle">!המשחקים הכי כיפיים</p>
-        </header>
+        <!-- Header (mounted by component) -->
+        <div id="header-mount"></div>
 
         <!-- Category Filter -->
         <nav class="category-filter">
@@ -128,6 +121,14 @@ export class App {
         </div>
       </div>
     `;
+
+        // Mount the Header component
+        const headerMount = this.rootElement.querySelector('#header-mount');
+        if (headerMount) {
+            if (this.header) this.header.unmount();
+            this.header = new Header(headerMount as HTMLElement);
+            this.header.mount();
+        }
 
         this.attachHomeListeners();
     }
