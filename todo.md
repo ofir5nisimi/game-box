@@ -5,23 +5,23 @@
 
 ---
 
-## Phase 1 — Project Scaffold
+## Phase 1 — Project Scaffold ✅
 
-- [ ] Initialize Vite project with TypeScript template
-- [ ] Configure `tsconfig.json` (strict mode, ES2022, DOM types)
-- [ ] Configure `vite.config.ts`
-- [ ] Create `index.html` with RTL support, Google Fonts, `<div id="app">`
-- [ ] Create `src/main.ts` entry point (empty bootstrap)
+- [x] Initialize Vite project with TypeScript template
+- [x] Configure `tsconfig.json` (strict mode, ES2022, DOM types)
+- [x] Configure `vite.config.ts`
+- [x] Create `index.html` with RTL support, Google Fonts, `<div id="app">`
+- [x] Create `src/main.ts` entry point (empty bootstrap)
 
 ---
 
-## Phase 2 — Core Framework
+## Phase 2 — Core Framework ✅
 
-- [ ] `src/types/index.ts` — shared interfaces & types (`GameCategory`, `GameState`, `IGameInfo`, `AppEvents`, `GameResult`)
-- [ ] `src/core/EventBus.ts` — generic typed pub/sub `EventBus<TEvents>`
-- [ ] `src/core/Component.ts` — abstract generic `Component<TState>` with lifecycle (`render`, `mount`, `unmount`, `setState`)
-- [ ] `src/core/Router.ts` — hash-based SPA router
-- [ ] `src/core/App.ts` — singleton app controller (owns Router, EventBus, GameRegistry)
+- [x] `src/types/index.ts` — shared interfaces & types (`GameCategory`, `GameState`, `IGameInfo`, `AppEvents`, `GameResult`)
+- [x] `src/core/EventBus.ts` — generic typed pub/sub `EventBus<TEvents>`
+- [x] `src/core/Component.ts` — abstract generic `Component<TState>` with lifecycle (`render`, `mount`, `unmount`, `setState`)
+- [x] `src/core/Router.ts` — hash-based SPA router
+- [x] `src/core/App.ts` — singleton app controller (owns Router, EventBus, GameRegistry)
 
 ---
 
