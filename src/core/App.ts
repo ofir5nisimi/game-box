@@ -15,10 +15,10 @@ import { Router } from './Router.ts';
 import { EventBus } from './EventBus.ts';
 import { Component } from './Component.ts';
 import { GameRegistry } from '../models/GameRegistry.ts';
-import { GameInfo } from '../models/GameInfo.ts';
 import { ParticleBackground } from '../components/ParticleBackground.ts';
 import { Header } from '../components/Header.ts';
 import { CategoryFilter as CategoryFilterComponent } from '../components/CategoryFilter.ts';
+import { GameGrid } from '../components/GameGrid.ts';
 import type { AppEvents, CategoryFilter } from '../types/index.ts';
 
 export class App {
@@ -32,6 +32,7 @@ export class App {
     private particleBg: ParticleBackground | null = null;
     private header: Header | null = null;
     private categoryFilter: CategoryFilterComponent | null = null;
+    private gameGrid: GameGrid | null = null;
     private activeCategory: CategoryFilter = 'all';
 
     private constructor(rootElement: HTMLElement, registry: GameRegistry) {
@@ -112,10 +113,8 @@ export class App {
         <!-- Category Filter (mounted by component) -->
         <div id="category-filter-mount"></div>
 
-        <!-- Game Cards Grid -->
-        <div class="game-grid" id="game-grid">
-          ${games.map((game, i) => this.renderGameCard(game, i)).join('')}
-        </div>
+        <!-- Game Cards Grid (mounted by component) -->
+        <div id="game-grid-mount"></div>
       </div>
     `;
 
@@ -141,6 +140,18 @@ export class App {
                 },
             );
             this.categoryFilter.mount();
+        }
+
+        // Mount the GameGrid component
+        const gridMount = this.rootElement.querySelector('#game-grid-mount');
+        if (gridMount) {
+            if (this.gameGrid) this.gameGrid.unmount();
+            this.gameGrid = new GameGrid(
+                gridMount as HTMLElement,
+                games,
+                (gameId) => this.router.navigate(`/game/${gameId}`),
+            );
+            this.gameGrid.mount();
         }
 
         this.attachHomeListeners();
@@ -176,31 +187,7 @@ export class App {
 
 
 
-    /**
-     * Render a single game card.
-     */
-    private renderGameCard(game: GameInfo, index: number): string {
-        const comingSoonClass = game.isAvailable ? '' : 'coming-soon';
-        const badge = game.isAvailable
-            ? ''
-            : '<span class="badge badge-coming-soon game-card__badge">...בקרוב ✨</span>';
 
-        return `
-      <div class="card game-card anim-fade-in-stagger ${comingSoonClass}"
-           data-game-id="${game.id}"
-           data-category="${game.category}"
-           style="animation-delay: ${index * 0.06}s;"
-           role="button"
-           tabindex="0"
-           aria-label="${game.title} — ${game.titleHe}">
-        ${badge}
-        <div class="game-card__icon">${game.icon}</div>
-        <div class="game-card__title-he">${game.titleHe}</div>
-        <div class="game-card__title-en">${game.title}</div>
-        <div class="game-card__description">${game.description}</div>
-      </div>
-    `;
-    }
 
     // ─── Event Listeners ────────────────────────────────────────
 
@@ -208,26 +195,7 @@ export class App {
      * Attach interactive event listeners to the home screen.
      */
     private attachHomeListeners(): void {
-        // Game card clicks
-        this.rootElement.querySelectorAll('.game-card').forEach((card) => {
-            card.addEventListener('click', () => {
-                const gameId = (card as HTMLElement).dataset['gameId'];
-                if (gameId) {
-                    this.router.navigate(`/game/${gameId}`);
-                }
-            });
-
-            // Keyboard accessibility
-            card.addEventListener('keydown', (e) => {
-                if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
-                    e.preventDefault();
-                    const gameId = (card as HTMLElement).dataset['gameId'];
-                    if (gameId) {
-                        this.router.navigate(`/game/${gameId}`);
-                    }
-                }
-            });
-        });
+        // All game interactions now handled by GameGrid component
     }
 
     // ─── Private ────────────────────────────────────────────────

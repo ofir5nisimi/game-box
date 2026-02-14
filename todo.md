@@ -96,23 +96,23 @@
 
 ---
 
-## Phase 8 — Game Cards Grid
+## Phase 8 — Game Cards Grid ✅
 
-- [ ] `src/components/GameCard.ts`:
+- [x] `src/components/GameCard.ts`:
   - Large card with rounded corners + glassmorphism effect
   - Big emoji icon (animated idle float)
   - Game title in both Hebrew and English
   - Category-colored accent strip on the card edge
   - Hover: wobble + glow + slight scale-up
-  - "...בקרוב" (coming soon) animated badge for unavailable games
+  - "...בקרוב" (coming soon) animated badge for unavailable games (z-index fixed)
   - Click ripple effect
   - Micro-animation: icon does a little dance on hover
-- [ ] `src/components/HomeScreen.ts`:
+- [x] `src/components/GameGrid.ts`:
   - Responsive CSS Grid layout (auto-fit, min 200px cards)
   - Staggered fade-in entrance for cards
   - Filters game cards based on selected category
   - Smooth layout transitions when filtering (cards slide into place)
-- [ ] `src/styles/home.css` — grid layout, card styles, responsive breakpoints
+- [x] `src/styles/home.css` — grid layout, card styles, responsive breakpoints
 
 ---
 
