@@ -19,6 +19,7 @@ import { ParticleBackground } from '../components/ParticleBackground.ts';
 import { Header } from '../components/Header.ts';
 import { CategoryFilter as CategoryFilterComponent } from '../components/CategoryFilter.ts';
 import { GameGrid } from '../components/GameGrid.ts';
+import { GameShell } from '../components/GameShell.ts';
 import type { AppEvents, CategoryFilter } from '../types/index.ts';
 
 export class App {
@@ -33,6 +34,7 @@ export class App {
     private header: Header | null = null;
     private categoryFilter: CategoryFilterComponent | null = null;
     private gameGrid: GameGrid | null = null;
+    private gameShell: GameShell | null = null;
     private activeCategory: CategoryFilter = 'all';
 
     private constructor(rootElement: HTMLElement, registry: GameRegistry) {
@@ -164,23 +166,12 @@ export class App {
         const game = this.registry.getGame(gameId);
         this.eventBus.emit('game:start', { gameId });
 
-        const title = game ? game.titleHe : gameId;
-        const icon = game ? game.icon : '🎮';
+        // Clear the root and mount GameShell
+        this.setView(null);
+        if (this.gameShell) this.gameShell.unmount();
 
-        this.rootElement.innerHTML = `
-      <div class="home-screen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;">
-        <a href="#/" class="btn-back" id="back-btn" style="position:absolute;top:var(--space-5);right:var(--space-5);">
-          → חזרה הביתה
-        </a>
-        <div style="text-align:center;" class="anim-fade-in">
-          <div style="font-size:5rem;margin-bottom:var(--space-4);" class="anim-float">${icon}</div>
-          <h2 style="margin-bottom:var(--space-3);">${title}</h2>
-          <div class="badge badge-coming-soon anim-shimmer" style="font-size:var(--font-size-lg);padding:var(--space-2) var(--space-5);">
-            ✨ ...בקרוב ✨
-          </div>
-        </div>
-      </div>
-    `;
+        this.gameShell = new GameShell(this.rootElement, game ?? null);
+        this.gameShell.mount();
     }
 
     // ─── Rendering Helpers ──────────────────────────────────────

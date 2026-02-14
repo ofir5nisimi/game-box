@@ -116,9 +116,9 @@
 
 ---
 
-## Phase 9 — Game Shell (Placeholder)
+## Phase 9 — Game Shell (Placeholder) ✅
 
-- [ ] `src/components/GameShell.ts`:
+- [x] `src/components/GameShell.ts`:
   - Wrapper displayed when navigating to a game route
   - Animated "back to home" button with ← arrow
   - Score display area (for future use)

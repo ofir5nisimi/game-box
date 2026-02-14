@@ -213,6 +213,7 @@
 .game-card__icon {
     font-size: 3.5rem;
     line-height: 1;
+    margin-top: var(--space-5);
     margin-bottom: var(--space-4);
     transition: transform var(--transition-normal);
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
@@ -260,9 +261,13 @@
 .game-card__badge {
     position: absolute;
     top: var(--space-3);
-    left: var(--space-3);
+    right: var(--space-3);
     z-index: 10;
     /* Ensure badge appears above game icon */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ─── Confetti ───────────────────────────────────────────── */
@@ -282,6 +287,53 @@
     top: -20px;
     font-size: 1.5rem;
 }
+
+/* ─── Game Shell ─────────────────────────────────────────── */
+.game-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-shell__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface-elevated);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.game-shell__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.game-shell__icon {
+    font-size: 2.5rem;
+}
+
+.game-shell__title h2 {
+    margin: 0;
+    font-size: var(--font-size-xl);
+}
+
+.game-shell__score {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-secondary);
+}
+
+.score-value {
+    color: var(--accent-primary);
+}
+
+.game-shell__content {
+    flex: 1;
+    padding: var(--space-5);
+}
+
 
 /* ─── Responsive ─────────────────────────────────────────── */
 @media (max-width: 768px) {
