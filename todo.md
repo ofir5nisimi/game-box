@@ -143,18 +143,18 @@
 
 ---
 
-## Phase 11 — Mobile & PWA
+## Phase 11 — Mobile & PWA ✅
 
-- [ ] `manifest.json` — PWA manifest for install-to-home-screen
-- [ ] Service worker for offline caching
-- [ ] App icons (192px, 512px) for PWA
-- [ ] `env(safe-area-inset-*)` for notched phones (iPhone X+)
-- [ ] Reduce particle count on mobile (detect `matchMedia` or screen width)
-- [ ] Add `-webkit-backdrop-filter` prefix for older Safari
-- [ ] Touch gesture support for games (swipe, tap feedback)
-- [ ] Orientation handling (lock or adapt for landscape/portrait)
-- [ ] Viewport meta refinement (`user-scalable=no` for game screens)
-- [ ] Test on real devices: iOS Safari, Android Chrome, tablet
+- [x] `manifest.json` — PWA manifest for install-to-home-screen
+- [x] Service worker for offline caching
+- [ ] App icons (192px, 512px) for PWA — See `public/ICONS_TODO.md`
+- [x] `env(safe-area-inset-*)` for notched phones (iPhone X+)
+- [x] Reduce particle count on mobile (detect `matchMedia` or screen width)
+- [ ] Add `-webkit-backdrop-filter` prefix for older Safari (already done in Phase 9)
+- [ ] Touch gesture support for games (swipe, tap feedback) — For future games
+- [ ] Orientation handling (lock or adapt for landscape/portrait) — For future games
+- [x] Viewport meta refinement (`viewport-fit=cover` for safe areas)
+- [ ] Test on real devices: iOS Safari, Android Chrome, tablet — Requires user testing
 
 ---
 

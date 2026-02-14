@@ -12,47 +12,47 @@ import { Component } from '../core/Component.ts';
 import type { GameInfo } from '../models/GameInfo.ts';
 
 interface GameShellState {
-    game: GameInfo | null;
-    score: number;
+  game: GameInfo | null;
+  score: number;
 }
 
 export class GameShell extends Component<GameShellState> {
-    constructor(container: HTMLElement, game: GameInfo | null) {
-        super(container, { game, score: 0 });
+  constructor(container: HTMLElement, game: GameInfo | null) {
+    super(container, { game, score: 0 });
+  }
+
+  render(): string {
+    const { game } = this.state;
+
+    if (!game) {
+      return this.renderNotFound();
     }
 
-    render(): string {
-        const { game } = this.state;
-
-        if (!game) {
-            return this.renderNotFound();
-        }
-
-        if (!game.isAvailable) {
-            return this.renderComingSoon(game);
-        }
-
-        // For available games, render the game shell
-        // (individual games will be implemented in future phases)
-        return this.renderGameContainer(game);
+    if (!game.isAvailable) {
+      return this.renderComingSoon(game);
     }
 
-    mount(): void {
-        super.mount();
-        this.attachListeners();
-    }
+    // For available games, render the game shell
+    // (individual games will be implemented in future phases)
+    return this.renderGameContainer(game);
+  }
 
-    protected afterRender(): void {
-        this.attachListeners();
-    }
+  mount(): void {
+    super.mount();
+    this.attachListeners();
+  }
 
-    /** Update the score display */
-    updateScore(newScore: number): void {
-        this.setState({ score: newScore });
-    }
+  protected afterRender(): void {
+    this.attachListeners();
+  }
 
-    private renderNotFound(): string {
-        return `
+  /** Update the score display */
+  updateScore(newScore: number): void {
+    this.setState({ score: newScore });
+  }
+
+  private renderNotFound(): string {
+    return `
       <div class="game-shell anim-slide-in-right" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;">
         <a href="#/" class="btn-back" style="position:absolute;top:var(--space-5);right:var(--space-5);">
           → חזרה הביתה
@@ -64,10 +64,10 @@ export class GameShell extends Component<GameShellState> {
         </div>
       </div>
     `;
-    }
+  }
 
-    private renderComingSoon(game: GameInfo): string {
-        return `
+  private renderComingSoon(game: GameInfo): string {
+    return `
       <div class="game-shell anim-slide-in-right" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;">
         <a href="#/" class="btn-back" style="position:absolute;top:var(--space-5);right:var(--space-5);">
           → חזרה הביתה
@@ -76,15 +76,15 @@ export class GameShell extends Component<GameShellState> {
           <div style="font-size:5rem;margin-bottom:var(--space-4);" class="anim-float">${game.icon}</div>
           <h2 style="margin-bottom:var(--space-3);">${game.titleHe}</h2>
           <div class="badge badge-coming-soon anim-shimmer" style="font-size:var(--font-size-lg);padding:var(--space-2) var(--space-5);">
-            ✨ ...בקרוב ✨
+            ✨ בקרוב... ✨
           </div>
         </div>
       </div>
     `;
-    }
+  }
 
-    private renderGameContainer(game: GameInfo): string {
-        return `
+  private renderGameContainer(game: GameInfo): string {
+    return `
       <div class="game-shell anim-slide-in-right">
         <div class="game-shell__header">
           <a href="#/" class="btn-back">
@@ -106,10 +106,10 @@ export class GameShell extends Component<GameShellState> {
         </div>
       </div>
     `;
-    }
+  }
 
-    private attachListeners(): void {
-        // Back button is a regular link, no custom handling needed
-        // Individual game listeners will be attached when games are implemented
-    }
+  private attachListeners(): void {
+    // Back button is a regular link, no custom handling needed
+    // Individual game listeners will be attached when games are implemented
+  }
 }

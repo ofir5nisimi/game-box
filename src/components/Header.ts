@@ -30,7 +30,7 @@ export class Header extends Component<HeaderState> {
           <span class="sparkle">💫</span>
           <h1 class="home-logo anim-bounce-in" id="logo">🎮 Game Box</h1>
         </div>
-        <p class="home-subtitle">!המשחקים הכי כיפיים</p>
+        <p class="home-subtitle">המשחקים הכי כיפיים!</p>
         ${this.state.showConfetti ? this.renderConfetti() : ''}
       </header>
     `;

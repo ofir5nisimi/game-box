@@ -36,7 +36,7 @@ export class GameCard extends Component<GameCardState> {
         const comingSoonClass = game.isAvailable ? '' : 'coming-soon';
         const badge = game.isAvailable
             ? ''
-            : '<span class="badge badge-coming-soon game-card__badge">...בקרוב ✨</span>';
+            : '<span class="badge badge-coming-soon game-card__badge">בקרוב... ✨</span>';
 
         return `
       <div class="card game-card anim-fade-in-stagger ${comingSoonClass}"

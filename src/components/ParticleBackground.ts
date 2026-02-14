@@ -29,7 +29,11 @@ interface Particle {
 
 // ─── Configuration ──────────────────────────────────────────
 
-const PARTICLE_COUNT = 35;
+const isMobile = (): boolean => window.innerWidth <= 768;
+const PARTICLE_COUNT_DESKTOP = 35;
+const PARTICLE_COUNT_MOBILE = 15;
+const PARTICLE_COUNT = isMobile() ? PARTICLE_COUNT_MOBILE : PARTICLE_COUNT_DESKTOP;
+
 const COLORS = [
     '#e94560',  // primary red
     '#ff6b81',  // primary light

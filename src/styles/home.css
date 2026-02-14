@@ -10,13 +10,15 @@
     position: relative;
     z-index: var(--z-content);
     min-height: 100vh;
-    padding-bottom: var(--space-9);
+    padding-bottom: max(var(--space-9), env(safe-area-inset-bottom));
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
 }
 
 /* ─── Header Section ─────────────────────────────────────── */
 .home-header {
     text-align: center;
-    padding-top: var(--space-9);
+    padding-top: max(var(--space-9), env(safe-area-inset-top));
     padding-bottom: var(--space-6);
 }
 

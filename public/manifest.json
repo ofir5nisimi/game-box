@@ -1,0 +1,32 @@
+{
+    "name": "Game Box — משחקים כיפיים",
+    "short_name": "Game Box",
+    "description": "אתר משחקים חינוכי ומהנה לילדים",
+    "start_url": "/game-box/",
+    "display": "standalone",
+    "background_color": "#1a1d2e",
+    "theme_color": "#ff4081",
+    "orientation": "portrait-primary",
+    "dir": "rtl",
+    "lang": "he",
+    "icons": [
+        {
+            "src": "/game-box/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/game-box/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "games",
+        "education",
+        "kids"
+    ],
+    "screenshots": []
+}
