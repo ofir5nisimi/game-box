@@ -59,34 +59,33 @@
 
 ---
 
-## Phase C — Game Logic & Integration
+## Phase C — Game Logic & Integration ✅
 
-- [ ] Wire up section selection → equation display → answer validation
-- [ ] Score tracking:
+- [x] Wire up section selection → equation display → answer validation
+- [x] Score tracking:
   - +10 first try, +5 second try, +2 third+ try
   - +20 completion bonus
   - +50 perfect score bonus
-- [ ] Progress tracking (completed sections count)
-- [ ] `src/games/color-by-number/components/CelebrationOverlay.ts`:
-  - Confetti + stars animation
+- [x] Progress tracking (completed sections count)
+- [x] Celebration overlay (inline in main game class):
   - Final score display
   - "Play Again" / "Back to Home" buttons
-- [ ] Register game in `GameRegistry` as `isAvailable: true`
-- [ ] Wire up `GameShell` → `ColorByNumber` via `gameClass`
+- [x] Register game in `GameRegistry` as `isAvailable: true`
+- [x] Wire up `GameShell` → `ColorByNumber` via `gameClass`
 
 ---
 
-## Phase D — Styling & Polish
+## Phase D — Styling & Polish ✅
 
-- [ ] `src/games/color-by-number/styles/color-by-number.css`:
+- [x] `src/games/color-by-number/styles/color-by-number.css`:
   - SVG section states (unsolved, selected, solved)
   - Golden pulse border animation
   - Color flood-fill transition (0.4s)
   - Wrong answer shake animation
-  - Sparkle burst on section complete
   - Number pad styling (big rounded buttons)
   - Celebration overlay
-- [ ] Mobile responsive layout:
+  - Back navigation buttons on all screens
+- [x] Mobile responsive layout:
   - SVG scales to viewport width
   - Number pad full-width on small screens
   - Color palette horizontal scroll on narrow screens

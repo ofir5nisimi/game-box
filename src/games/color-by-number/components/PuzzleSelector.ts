@@ -38,6 +38,9 @@ export class PuzzleSelector extends Component<PuzzleSelectorState> {
 
         return `
             <div class="cbn-puzzle-selector">
+                <a href="#/" class="btn-back" style="position:absolute;top:var(--space-5);right:var(--space-5);">
+                    → חזרה הביתה
+                </a>
                 <h2 class="cbn-section-title">בחר ציור</h2>
                 <div class="cbn-puzzle-grid">${cards}</div>
             </div>

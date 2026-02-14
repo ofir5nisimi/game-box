@@ -32,7 +32,7 @@ export interface GameResult {
  * The actual type validation happens at registration time in main.ts.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type GameConstructor = new (container: HTMLElement, eventBus: any) => any;
+export type GameConstructor = new (container: HTMLElement, eventBus?: any) => any;
 
 /** Configuration for registering a game in the registry */
 export interface IGameInfo {

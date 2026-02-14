@@ -1,0 +1,593 @@
+/**
+ * Color by Number — Game Styles
+ *
+ * Styling for all game phases and components.
+ * Uses the shared design tokens from the main app.
+ */
+
+/* ─── Shared Game Layout ──────────────────────────────────── */
+.cbn-game {
+    position: relative;
+    z-index: var(--z-content);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-4) var(--space-4) var(--space-8);
+}
+
+.cbn-section-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    text-align: center;
+    margin-bottom: var(--space-6);
+    color: var(--color-text);
+}
+
+/* ─── Difficulty Selector ─────────────────────────────────── */
+.cbn-difficulty-selector {
+    width: 100%;
+    max-width: 500px;
+    padding-top: var(--space-9);
+}
+
+.cbn-difficulty-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.cbn-difficulty-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    background: var(--surface-elevated);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    color: var(--color-text);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-lg);
+}
+
+.cbn-difficulty-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 20px rgba(233, 69, 96, 0.2);
+}
+
+.cbn-difficulty-btn.active {
+    border-color: var(--color-accent);
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.15), rgba(255, 107, 129, 0.1));
+    box-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
+}
+
+.cbn-difficulty-emoji {
+    font-size: 2rem;
+}
+
+.cbn-difficulty-label {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    flex: 1;
+}
+
+.cbn-difficulty-sublabel {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* ─── Puzzle Selector ─────────────────────────────────────── */
+.cbn-puzzle-selector {
+    width: 100%;
+    max-width: 600px;
+    padding-top: var(--space-9);
+}
+
+.cbn-puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-4);
+}
+
+.cbn-puzzle-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-5) var(--space-3);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    background: var(--surface-elevated);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    color: var(--color-text);
+    font-family: var(--font-primary);
+}
+
+.cbn-puzzle-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 25px rgba(233, 69, 96, 0.2);
+}
+
+.cbn-puzzle-icon {
+    font-size: 3rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.cbn-puzzle-name {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+}
+
+.cbn-puzzle-name-en {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* ─── Score Bar ───────────────────────────────────────────── */
+.cbn-score-bar {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-elevated);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-primary);
+    margin-bottom: var(--space-4);
+}
+
+.cbn-back-btn {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.cbn-back-btn:hover {
+    background: var(--surface-hover);
+    border-color: var(--color-accent);
+}
+
+.cbn-score-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+    min-width: 0;
+}
+
+.cbn-score-icon {
+    font-size: 1.5rem;
+}
+
+.cbn-score-name {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cbn-score-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.cbn-progress-wrapper {
+    width: 60px;
+    height: 6px;
+    background: var(--surface-card);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.cbn-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-accent), #ff6b81);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+}
+
+.cbn-score-display {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    color: var(--color-accent);
+    white-space: nowrap;
+}
+
+/* ─── Puzzle Canvas ───────────────────────────────────────── */
+.cbn-canvas-wrapper {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    direction: ltr;
+}
+
+.cbn-canvas {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.cbn-section {
+    transition: fill 0.4s ease, stroke 0.3s ease;
+}
+
+.cbn-section--unsolved {
+    cursor: pointer;
+}
+
+.cbn-section--unsolved:hover {
+    filter: brightness(1.2);
+    stroke: #ffd700;
+    stroke-width: 2.5;
+}
+
+.cbn-section--selected {
+    animation: pulse-border 1s ease-in-out infinite;
+}
+
+.cbn-section--solved {
+    cursor: default;
+}
+
+.cbn-section-label {
+    font-family: var(--font-primary);
+    font-size: 14px;
+    fill: #333;
+    font-weight: 700;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+@keyframes pulse-border {
+
+    0%,
+    100% {
+        stroke: #ffd700;
+        stroke-width: 3;
+    }
+
+    50% {
+        stroke: #ffaa00;
+        stroke-width: 4;
+    }
+}
+
+/* ─── Color Palette ───────────────────────────────────────── */
+.cbn-color-palette {
+    width: 100%;
+    max-width: 500px;
+    margin: var(--space-4) auto;
+}
+
+.cbn-palette-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.cbn-swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.cbn-swatch-color {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cbn-swatch-label {
+    font-size: 10px;
+    color: var(--text-secondary);
+}
+
+/* ─── Math Input ──────────────────────────────────────────── */
+.cbn-math-input {
+    width: 100%;
+    max-width: 400px;
+    margin: var(--space-4) auto;
+    padding: var(--space-4);
+    background: var(--surface-elevated);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-primary);
+    transition: border-color 0.3s ease, transform 0.2s ease;
+}
+
+.cbn-math-input--hidden {
+    display: none;
+}
+
+.cbn-math-input--correct {
+    border-color: #6bcb77;
+    box-shadow: 0 0 20px rgba(107, 203, 119, 0.3);
+}
+
+.cbn-math-input--wrong {
+    animation: shake 0.4s ease-in-out;
+    border-color: #ff6b6b;
+}
+
+.cbn-equation-display {
+    text-align: center;
+    margin-bottom: var(--space-4);
+    position: relative;
+    direction: ltr;
+}
+
+.cbn-equation-text {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    color: var(--color-text);
+}
+
+.cbn-equation-answer {
+    display: inline-block;
+    min-width: 50px;
+    padding: var(--space-1) var(--space-3);
+    border-bottom: 3px solid var(--color-accent);
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    color: var(--color-accent);
+}
+
+.cbn-feedback-msg {
+    display: block;
+    margin-top: var(--space-2);
+    color: #ff6b6b;
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    animation: fade-in 0.3s ease;
+}
+
+.cbn-numpad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-2);
+    max-width: 280px;
+    margin: 0 auto;
+    direction: ltr;
+}
+
+.cbn-numpad-btn {
+    width: 100%;
+    aspect-ratio: 1;
+    min-height: 48px;
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cbn-numpad-btn:hover {
+    background: var(--surface-hover);
+    transform: scale(1.05);
+}
+
+.cbn-numpad-btn:active {
+    transform: scale(0.95);
+}
+
+.cbn-numpad-clear {
+    background: rgba(255, 107, 107, 0.15);
+    border-color: rgba(255, 107, 107, 0.3);
+    color: #ff6b6b;
+}
+
+.cbn-numpad-submit {
+    background: rgba(107, 203, 119, 0.15);
+    border-color: rgba(107, 203, 119, 0.3);
+    color: #6bcb77;
+    font-size: var(--font-size-2xl);
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ─── Celebration ─────────────────────────────────────────── */
+.cbn-celebration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    text-align: center;
+    animation: fade-in 0.5s ease;
+}
+
+.cbn-celebration-icon {
+    font-size: 6rem;
+    margin-bottom: var(--space-4);
+    animation: float 3s ease-in-out infinite;
+}
+
+.cbn-celebration-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-3xl);
+    color: var(--color-accent);
+    margin-bottom: var(--space-2);
+}
+
+.cbn-celebration-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+.cbn-celebration-stats {
+    display: flex;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+}
+
+.cbn-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.cbn-stat-value {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    color: var(--color-text);
+}
+
+.cbn-stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.cbn-stat--perfect .cbn-stat-value {
+    color: #ffd700;
+    animation: float 2s ease-in-out infinite;
+}
+
+.cbn-celebration-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 250px;
+}
+
+.cbn-btn {
+    padding: var(--space-3) var(--space-5);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    color: var(--color-text);
+}
+
+.cbn-btn-primary {
+    background: linear-gradient(135deg, var(--color-accent), #ff6b81);
+    border-color: var(--color-accent);
+    color: white;
+}
+
+.cbn-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(233, 69, 96, 0.4);
+}
+
+.cbn-btn-secondary {
+    background: transparent;
+}
+
+.cbn-btn-secondary:hover {
+    background: var(--surface-hover);
+    transform: translateY(-2px);
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .cbn-game {
+        padding: var(--space-3) var(--space-3) var(--space-6);
+    }
+
+    .cbn-difficulty-btn {
+        padding: var(--space-4) var(--space-4);
+    }
+
+    .cbn-puzzle-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cbn-numpad {
+        max-width: 240px;
+    }
+
+    .cbn-numpad-btn {
+        min-height: 44px;
+        font-size: var(--font-size-lg);
+    }
+
+    .cbn-swatch-color {
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
+    }
+
+    .cbn-score-bar {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+}
+
+/* ─── Float animation (reuse if not defined globally) ─────── */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}

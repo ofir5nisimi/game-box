@@ -15,7 +15,10 @@ interface DifficultySelectorState {
 export class DifficultySelector extends Component<DifficultySelectorState> {
     private onSelect: (difficulty: Difficulty) => void;
 
-    constructor(container: HTMLElement, onSelect: (difficulty: Difficulty) => void) {
+    constructor(
+        container: HTMLElement,
+        onSelect: (difficulty: Difficulty) => void,
+    ) {
         super(container, { selected: null });
         this.onSelect = onSelect;
     }
@@ -38,6 +41,9 @@ export class DifficultySelector extends Component<DifficultySelectorState> {
 
         return `
             <div class="cbn-difficulty-selector">
+                <a href="#/" class="btn-back" style="position:absolute;top:var(--space-5);right:var(--space-5);">
+                    → חזרה הביתה
+                </a>
                 <h2 class="cbn-section-title">בחר רמת קושי</h2>
                 <div class="cbn-difficulty-buttons">${buttons}</div>
             </div>

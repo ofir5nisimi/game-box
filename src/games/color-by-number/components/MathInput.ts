@@ -36,7 +36,7 @@ export class MathInput extends Component<MathInputState> {
         const feedbackClass = feedback !== 'none' ? `cbn-math-input--${feedback}` : '';
         const feedbackMsg = feedback === 'wrong' ? '<span class="cbn-feedback-msg">נסה שוב!</span>' : '';
 
-        const numpad = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((n) => `
+        const numpad = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0].map((n) => `
             <button class="cbn-numpad-btn" data-num="${n}">${n}</button>
         `).join('');
 

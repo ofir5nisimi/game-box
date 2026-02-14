@@ -7,6 +7,7 @@
  * Manages state, child components, scoring, and phase transitions.
  */
 
+import './styles/color-by-number.css';
 import { Component } from '../../core/Component.ts';
 import type { Difficulty, PuzzleTemplate, SectionState, GamePhase } from './types.ts';
 import { generateEquation } from './utils/equationGenerator.ts';

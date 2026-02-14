@@ -5,7 +5,7 @@
  * - Animated back button
  * - Score display area (for future use)
  * - Coming soon splash for unavailable games
- * - Slide-in page transition
+ * - Mounts actual game class inside #game-content when available
  */
 
 import { Component } from '../core/Component.ts';
@@ -17,6 +17,10 @@ interface GameShellState {
 }
 
 export class GameShell extends Component<GameShellState> {
+  /** The mounted game instance (if any). */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private gameInstance: any = null;
+
   constructor(container: HTMLElement, game: GameInfo | null) {
     super(container, { game, score: 0 });
   }
@@ -32,18 +36,28 @@ export class GameShell extends Component<GameShellState> {
       return this.renderComingSoon(game);
     }
 
-    // For available games, render the game shell
-    // (individual games will be implemented in future phases)
+    // For available games, render a shell with a mount point
     return this.renderGameContainer(game);
   }
 
   mount(): void {
     super.mount();
     this.attachListeners();
+    this.mountGameInstance();
   }
 
   protected afterRender(): void {
     this.attachListeners();
+    this.mountGameInstance();
+  }
+
+  unmount(): void {
+    // Unmount the game instance before clearing the shell
+    if (this.gameInstance && typeof this.gameInstance.unmount === 'function') {
+      this.gameInstance.unmount();
+      this.gameInstance = null;
+    }
+    super.unmount();
   }
 
   /** Update the score display */
@@ -83,33 +97,42 @@ export class GameShell extends Component<GameShellState> {
     `;
   }
 
-  private renderGameContainer(game: GameInfo): string {
+  private renderGameContainer(_game: GameInfo): string {
     return `
       <div class="game-shell anim-slide-in-right">
-        <div class="game-shell__header">
-          <a href="#/" class="btn-back">
-            → חזרה הביתה
-          </a>
-          <div class="game-shell__title">
-            <span class="game-shell__icon">${game.icon}</span>
-            <h2>${game.titleHe}</h2>
-          </div>
-          <div class="game-shell__score">
-            ניקוד: <span class="score-value">${this.state.score}</span>
-          </div>
-        </div>
         <div class="game-shell__content" id="game-content">
-          <!-- Game instance will be mounted here in future phases -->
-          <div style="display:flex;align-items:center;justify-content:center;min-height:60vh;color:var(--text-secondary);">
-            <p>Game implementation coming soon...</p>
-          </div>
+          <!-- Game instance will mount here -->
         </div>
       </div>
     `;
   }
 
+  /**
+   * If the game has a gameClass, instantiate and mount it into #game-content.
+   */
+  private mountGameInstance(): void {
+    const { game } = this.state;
+    if (!game || !game.isAvailable || !game.gameClass) return;
+
+    const contentEl = this.element.querySelector('#game-content') as HTMLElement | null;
+    if (!contentEl) return;
+
+    // Instantiate the game class
+    const GameClass = game.gameClass;
+    this.gameInstance = new GameClass(contentEl);
+
+    // If the game supports setOnExit, wire it up to navigate home
+    if (typeof this.gameInstance.setOnExit === 'function') {
+      this.gameInstance.setOnExit(() => {
+        window.location.hash = '#/';
+      });
+    }
+
+    // Mount the game
+    this.gameInstance.mount();
+  }
+
   private attachListeners(): void {
     // Back button is a regular link, no custom handling needed
-    // Individual game listeners will be attached when games are implemented
   }
 }

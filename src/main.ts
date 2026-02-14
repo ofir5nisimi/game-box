@@ -9,6 +9,7 @@ import './styles/index.css';
 import { App } from './core/App.ts';
 import { GameInfo } from './models/GameInfo.ts';
 import { GameRegistry } from './models/GameRegistry.ts';
+import { ColorByNumber } from './games/color-by-number/ColorByNumber.ts';
 
 // ─── Game Registration ────────────────────────────────────────
 
@@ -83,8 +84,8 @@ function registerGames(registry: GameRegistry): void {
         icon: '🎨',
         category: 'math',
         color: '#1abc9c',
-        isAvailable: false,
-        gameClass: null,
+        isAvailable: true,
+        gameClass: ColorByNumber,
     }));
 
     // English games 🔤
