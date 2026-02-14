@@ -26,32 +26,32 @@
 
 ---
 
-## Phase B — Game UI Components
+## Phase B — Game UI Components ✅
 
-- [ ] `src/games/color-by-number/ColorByNumber.ts` — Main game class:
+- [x] `src/games/color-by-number/ColorByNumber.ts` — Main game class:
   - Extends `Component`
   - State management (difficulty, puzzle, phase)
   - Phase transitions: select-difficulty → select-puzzle → playing → complete
-- [ ] `src/games/color-by-number/components/DifficultySelector.ts`:
+- [x] `src/games/color-by-number/components/DifficultySelector.ts`:
   - 3 buttons: קל / בינוני / קשה
   - Gradient active states matching main app style
-- [ ] `src/games/color-by-number/components/PuzzleSelector.ts`:
+- [x] `src/games/color-by-number/components/PuzzleSelector.ts`:
   - Grid of puzzle cards with emoji icon preview
   - Filter by selected difficulty
-- [ ] `src/games/color-by-number/components/PuzzleCanvas.ts`:
+- [x] `src/games/color-by-number/components/PuzzleCanvas.ts`:
   - SVG rendering with `<path>` elements per section
   - Click/tap handling on sections
   - Visual states: unsolved (gray), selected (pulsing border), solved (color fill)
-- [ ] `src/games/color-by-number/components/ColorPalette.ts`:
+- [x] `src/games/color-by-number/components/ColorPalette.ts`:
   - Horizontal row of color swatches
   - Number label on each swatch
   - Hebrew color name tooltip
-- [ ] `src/games/color-by-number/components/MathInput.ts`:
+- [x] `src/games/color-by-number/components/MathInput.ts`:
   - Equation display area (e.g., `5 + 3 = ?`)
   - Number pad (0–9) with big touch targets (≥44px)
   - Submit button
   - Correct/wrong feedback animation
-- [ ] `src/games/color-by-number/components/ScoreBar.ts`:
+- [x] `src/games/color-by-number/components/ScoreBar.ts`:
   - Back button
   - Puzzle name + icon
   - Progress bar (sections completed / total)
