@@ -127,19 +127,19 @@
 
 ---
 
-## Phase 10 — Polish & Integration
+## Phase 10 — Polish & Integration ✅
 
-- [ ] Wire up `App.ts` — full lifecycle: boot → home → filter → navigate → back
-- [ ] Router integration: `#/` → home, `#/game/:id` → GameShell
-- [ ] Test all category filtering with smooth transitions
-- [ ] Test responsive layout on mobile / tablet / desktop widths
-- [ ] Test RTL layout correctness
-- [ ] Performance check — animation smoothness (60fps target)
+- [x] Wire up `App.ts` — full lifecycle: boot → home → filter → navigate → back
+- [x] Router integration: `#/` → home, `#/game/:id` → GameShell
+- [x] Test all category filtering with smooth transitions
+- [x] Test responsive layout on mobile / tablet / desktop widths
+- [x] Test RTL layout correctness
+- [x] Performance check — animation smoothness (60fps target)
 - [ ] Add subtle UI sound effects (optional, if assets available):
   - Click feedback
   - Category switch whoosh
   - Card hover pop
-- [ ] Final visual polish pass — spacing, shadows, consistency
+- [x] Final visual polish pass — spacing, shadows, consistency
 
 ---
 
