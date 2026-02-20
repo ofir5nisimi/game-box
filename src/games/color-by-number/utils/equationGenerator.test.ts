@@ -52,7 +52,7 @@ describe('generateEquation', () => {
         });
     });
 
-    describe('Hard difficulty (addition, subtraction, multiplication)', () => {
+    describe('Hard difficulty (addition, subtraction, multiplication, division)', () => {
         it('should produce valid equations for targets 1-8', () => {
             for (let target = 1; target <= 8; target++) {
                 for (let i = 0; i < 5; i++) {
@@ -120,7 +120,7 @@ describe('generateEquations', () => {
 // ─── Helper ─────────────────────────────────────────────────
 
 /**
- * Evaluate a simple equation string like "3 + 2" or "7 - 4" or "2 × 3"
+ * Evaluate a simple equation string like "3 + 2" or "7 - 4" or "2 × 3" or "12 ÷ 4"
  */
 function evaluateEquation(equation: string): number {
     const parts = equation.split(' ');
@@ -136,6 +136,7 @@ function evaluateEquation(equation: string): number {
         case '+': return a + b;
         case '-': return a - b;
         case '×': return a * b;
+        case '÷': return a / b;
         default: throw new Error(`Unknown operator: "${op}"`);
     }
 }

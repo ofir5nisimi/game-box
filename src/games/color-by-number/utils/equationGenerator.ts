@@ -40,6 +40,9 @@ export function generateEquation(targetAnswer: number, difficulty: Difficulty): 
         case '×':
             equation = generateMultiplication(targetAnswer, config.maxNumber);
             break;
+        case '÷':
+            equation = generateDivision(targetAnswer, config.maxNumber);
+            break;
         default:
             equation = generateAddition(targetAnswer, config.maxNumber);
     }
@@ -92,6 +95,32 @@ function generateMultiplication(target: number, maxNumber: number): string {
 
     const [a, b] = factors[Math.floor(Math.random() * factors.length)]!;
     return `${a} × ${b}`;
+}
+
+/**
+ * Generate a division equation: a ÷ b = target
+ * where a = target × b, so it divides evenly.
+ * Falls back to subtraction for target 0 or 1.
+ */
+function generateDivision(target: number, maxNumber: number): string {
+    if (target <= 1) {
+        return generateSubtraction(target, maxNumber);
+    }
+
+    // Pick a divisor b between 2 and floor(maxNumber / target) so a stays reasonable
+    const maxB = Math.max(2, Math.floor(maxNumber / target));
+    const possibleDivisors: number[] = [];
+    for (let b = 2; b <= maxB; b++) {
+        possibleDivisors.push(b);
+    }
+
+    if (possibleDivisors.length === 0) {
+        return generateSubtraction(target, maxNumber);
+    }
+
+    const b = possibleDivisors[Math.floor(Math.random() * possibleDivisors.length)]!;
+    const a = target * b;
+    return `${a} ÷ ${b}`;
 }
 
 /**

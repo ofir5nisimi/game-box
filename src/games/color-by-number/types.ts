@@ -31,8 +31,8 @@ export const DIFFICULTY_CONFIGS: Record<Difficulty, DifficultyConfig> = {
     hard: {
         label: 'Hard',
         labelHe: 'קשה',
-        operations: ['+', '-', '×'],
-        maxNumber: 12,
+        operations: ['+', '-', '×', '÷'],
+        maxNumber: 20,
     },
 };
 
